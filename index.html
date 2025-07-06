@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Pet Names - Name Generator</title>
-    <meta name="description" content="Generate creative names with meanings for any pet - dogs, cats, birds, reptiles, and fish. Find the perfect name for your furry, feathery, or scaly friend!">
+    <title>Divine Pet Names - Magical Name Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,45 +14,104 @@
         }
         
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --light: #f7f1ff;
+            --dark: #2d3436;
+            --success: #00cec9;
+            --moon: #d8e2ff;
+            --starlight: #fffde7;
+            --magic: #e056fd;
+            --night: #1a0b2e;
+            --ai-blue: #4da6ff;
         }
         
         body {
-            background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%);
+            background: radial-gradient(circle at top, #1a0b2e, #0c0517);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
         }
         
         .container {
             max-width: 900px;
             width: 100%;
-            background: white;
+            background: rgba(25, 20, 48, 0.85);
             border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 50px rgba(108, 92, 231, 0.3);
             overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 92, 231, 0.4);
+            z-index: 10;
+        }
+        
+        /* Magical background elements */
+        .magic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite ease-in-out;
+        }
+        
+        .magic-particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #5d3fbe 100%);
             color: white;
             text-align: center;
             padding: 40px 30px;
             position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
         
         h1 {
             font-size: 3.2rem;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 0 15px rgba(253, 121, 168, 0.7);
+            background: linear-gradient(to right, #fdcbf1, #a6c1ee, #fd79a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
         
         .subtitle {
@@ -62,6 +120,7 @@
             max-width: 700px;
             margin: 0 auto 10px;
             line-height: 1.6;
+            text-shadow: 0 0 10px rgba(253, 121, 168, 0.4);
         }
         
         .pet-icon {
@@ -70,10 +129,48 @@
             right: 25px;
             font-size: 4rem;
             opacity: 0.25;
+            color: var(--moon);
         }
         
         .content {
             padding: 35px;
+        }
+        
+        /* Introduction section */
+        .intro-section {
+            background: rgba(44, 34, 80, 0.6);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(92, 70, 156, 0.4);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .intro-section h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .intro-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: var(--moon);
         }
         
         .controls {
@@ -90,22 +187,25 @@
         }
         
         .control-group {
-            background: var(--light);
+            background: rgba(44, 34, 80, 0.6);
             border-radius: 18px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 25px rgba(92, 70, 156, 0.4);
+            border: 1px solid rgba(108, 92, 231, 0.3);
         }
         
         .control-group h2 {
             margin-bottom: 20px;
-            color: var(--primary);
+            color: var(--secondary);
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.6rem;
         }
         
         .control-group h2 i {
             font-size: 1.8rem;
+            color: var(--accent);
         }
         
         .pet-selector {
@@ -116,8 +216,8 @@
         }
         
         .pet-option {
-            background: white;
-            border: 2px solid #e9ecef;
+            background: rgba(52, 40, 94, 0.7);
+            border: 2px solid rgba(108, 92, 231, 0.3);
             border-radius: 15px;
             padding: 18px 15px;
             cursor: pointer;
@@ -132,20 +232,34 @@
         
         .pet-option:hover {
             transform: translateY(-5px);
-            border-color: var(--secondary);
-            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.3);
         }
         
         .pet-option.selected {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #8c7ae6 100%);
             color: white;
-            border-color: var(--secondary);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.5);
         }
         
         .pet-option i {
             font-size: 2.8rem;
             margin-bottom: 12px;
             display: block;
+            color: var(--secondary);
+        }
+        
+        .pet-option.selected i {
+            color: white;
+        }
+        
+        .pet-option span {
+            color: var(--moon);
+        }
+        
+        .pet-option.selected span {
+            color: white;
         }
         
         .gender-selector {
@@ -155,8 +269,8 @@
         }
         
         .gender-option {
-            background: white;
-            border: 2px solid #e9ecef;
+            background: rgba(52, 40, 94, 0.7);
+            border: 2px solid rgba(108, 92, 231, 0.3);
             border-radius: 15px;
             padding: 18px 25px;
             cursor: pointer;
@@ -171,19 +285,33 @@
         .gender-option:hover {
             transform: translateY(-3px);
             border-color: var(--accent);
-            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.15);
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.3);
         }
         
         .gender-option.selected {
-            background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
             color: white;
             border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(253, 121, 168, 0.5);
         }
         
         .gender-option i {
             font-size: 2.5rem;
             margin-bottom: 10px;
             display: block;
+            color: var(--secondary);
+        }
+        
+        .gender-option.selected i {
+            color: white;
+        }
+        
+        .gender-option span {
+            color: var(--moon);
+        }
+        
+        .gender-option.selected span {
+            color: white;
         }
         
         .generate-container {
@@ -192,7 +320,7 @@
         }
         
         #generate-btn {
-            background: linear-gradient(135deg, var(--accent) 0%, #b5179e 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, #e056fd 100%);
             color: white;
             border: none;
             border-radius: 60px;
@@ -201,19 +329,34 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(247, 37, 133, 0.35);
+            box-shadow: 0 10px 25px rgba(253, 121, 168, 0.5);
             display: inline-flex;
             align-items: center;
             gap: 12px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        #generate-btn::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 6s linear infinite;
+            z-index: -1;
         }
         
         #generate-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(247, 37, 133, 0.45);
+            box-shadow: 0 15px 30px rgba(253, 121, 168, 0.7);
         }
         
         .result-container {
-            background: var(--light);
+            background: rgba(44, 34, 80, 0.6);
             border-radius: 20px;
             padding: 35px;
             text-align: center;
@@ -223,10 +366,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 5px 25px rgba(92, 70, 156, 0.4);
+            border: 1px solid rgba(108, 92, 231, 0.3);
             position: relative;
             overflow: hidden;
-            border: 2px dashed #e2e6ea;
         }
         
         .result-container::before {
@@ -236,17 +379,18 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), #4cc9f0);
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
         }
         
         .name-result {
             font-size: 3.2rem;
-            color: var(--dark);
+            color: var(--starlight);
             margin: 15px 0 10px;
             font-weight: 800;
             text-align: center;
             min-height: 70px;
             transition: all 0.4s ease;
+            text-shadow: 0 0 15px rgba(253, 121, 168, 0.7);
         }
         
         .meaning {
@@ -256,10 +400,14 @@
             font-style: italic;
             max-width: 600px;
             line-height: 1.6;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
         }
         
         .result-placeholder {
-            color: #adb5bd;
+            color: #a29bfe;
             font-size: 1.6rem;
             font-style: italic;
             margin-top: 30px;
@@ -275,7 +423,7 @@
         
         .pet-icon-item {
             font-size: 3rem;
-            color: var(--primary);
+            color: var(--secondary);
             animation: float 3s ease-in-out infinite;
             opacity: 0.7;
         }
@@ -286,9 +434,54 @@
         .pet-icon-item:nth-child(4) { animation-delay: 1.5s; }
         .pet-icon-item:nth-child(5) { animation-delay: 2s; }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        /* AdSense containers */
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(44, 34, 80, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            box-shadow: 0 5px 15px rgba(92, 70, 156, 0.3);
+            min-height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ad-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: var(--moon);
+            opacity: 0.7;
+        }
+
+        .ad-placeholder {
+            color: var(--moon);
+            font-size: 1rem;
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed var(--accent);
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .ad-content {
+            width: 100%;
+            text-align: center;
         }
         
         .favorites {
@@ -298,7 +491,7 @@
         .favorites h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: var(--dark);
+            color: var(--starlight);
             font-size: 1.8rem;
             display: flex;
             align-items: center;
@@ -314,7 +507,7 @@
         }
         
         .favorite-item {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             padding: 12px 25px;
             border-radius: 15px;
@@ -323,6 +516,8 @@
             flex-direction: column;
             align-items: center;
             min-width: 180px;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+            position: relative;
         }
         
         .favorite-name {
@@ -334,6 +529,13 @@
         .favorite-meaning {
             font-size: 0.95rem;
             opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .favorite-meta {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 5px;
         }
         
         .actions {
@@ -354,146 +556,193 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         #save-btn {
-            background: linear-gradient(135deg, var(--success) 0%, #4895ef 100%);
+            background: linear-gradient(135deg, var(--success) 0%, #00b894 100%);
             color: white;
         }
         
+        #save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 206, 201, 0.4);
+        }
+        
         #reset-btn {
-            background: #e9ecef;
-            color: #495057;
+            background: #636e72;
+            color: #dfe6e9;
         }
         
         #reset-btn:hover {
-            background: #dee2e6;
-        }
-        
-        /* Ad container styles */
-        .ad-container {
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 30px 0;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .ad-container.middle {
-            max-width: 728px;
-            height: 90px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
-        }
-        
-        .ad-container.bottom {
-            max-width: 728px;
-            height: 250px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #f0f4f8 0%, #dfe3e7 100%);
-        }
-        
-        .ad-label {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 0.7rem;
-            color: #6c757d;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        
-        .ad-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            color: #495057;
-            font-weight: 500;
-        }
-        
-        .ad-content i {
-            margin-right: 10px;
-            color: #4361ee;
+            background: #b2bec3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(178, 190, 195, 0.4);
         }
         
         footer {
             text-align: center;
             padding: 25px;
-            background: #f8f9fa;
-            color: #6c757d;
+            background: rgba(25, 20, 48, 0.9);
+            color: var(--moon);
             font-size: 1rem;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid rgba(108, 92, 231, 0.3);
         }
         
-        .privacy-link {
-            color: #4361ee;
-            text-decoration: none;
+        .footer-top {
+            margin-bottom: 20px;
+        }
+        
+        /* Footer links */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin-top: 10px;
+        }
+        
+        .footer-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
             display: inline-block;
+            padding: 5px 0;
         }
         
-        .privacy-link:hover {
-            text-decoration: underline;
+        .footer-link:hover {
+            color: var(--accent);
         }
         
-        .deployment-guide {
-            background-color: #f1f8ff;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 30px 0;
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
         
-        .deployment-guide h3 {
-            color: #3a0ca3;
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        .footer-details {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(44, 34, 80, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(92, 70, 156, 0.4);
+            text-align: left;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+        }
+        
+        .footer-section {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.3);
+        }
+        
+        .footer-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
         }
         
-        .deployment-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+        .footer-section h3 .toggle-icon {
+            transition: transform 0.3s ease;
         }
         
-        .step {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
+        .footer-section h3 i {
+            color: var(--accent);
+            font-size: 1.2rem;
         }
         
-        .step-number {
-            background: #4361ee;
-            color: white;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            font-weight: bold;
+        .footer-section .content {
+            display: none;
+            padding: 15px 0;
+            font-size: 0.95rem;
         }
         
-        .step-content {
-            flex: 1;
+        .footer-section.active .content {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
         
-        .step-content h4 {
-            margin-bottom: 5px;
-            color: #212529;
+        .footer-section.active h3 .toggle-icon {
+            transform: rotate(180deg);
         }
         
-        .step-content p {
-            color: #495057;
+        .footer-section p {
             line-height: 1.6;
+            margin-bottom: 10px;
+            color: var(--moon);
+        }
+        
+        .footer-section ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: var(--moon);
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .ai-highlight {
+            background: linear-gradient(135deg, var(--ai-blue) 0%, #0066cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
@@ -522,14 +771,12 @@
                 font-size: 2.2rem;
             }
             
-            .ad-container.middle {
-                max-width: 100%;
-                height: 90px;
+            .footer-links {
+                flex-wrap: wrap;
             }
             
-            .ad-container.bottom {
-                max-width: 100%;
-                height: 250px;
+            .ad-container {
+                margin: 20px 0;
             }
         }
         
@@ -550,17 +797,21 @@
                 font-size: 1.1rem;
             }
             
-            .ad-container.middle {
-                height: 70px;
-            }
-            
-            .ad-container.bottom {
-                height: 200px;
-            }
-            
             #generate-btn {
                 padding: 16px 30px;
                 font-size: 1.2rem;
+            }
+            
+            .footer-details {
+                padding: 15px;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .ad-container {
+                padding: 15px;
             }
         }
         
@@ -592,20 +843,94 @@
             0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
             100% { transform: rotate(360deg) scale(1); opacity: 1; }
         }
+        
+        /* Delete button styling */
+        .delete-favorite {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .delete-favorite:hover {
+            background: rgba(255, 0, 0, 0.3);
+            color: white;
+            transform: scale(1.2);
+        }
+        
+        /* Empty state styling */
+        .empty-grimoire {
+            text-align: center;
+            padding: 30px;
+            background: rgba(44, 34, 80, 0.4);
+            border-radius: 15px;
+            border: 2px dashed var(--accent);
+            width: 100%;
+            color: var(--moon);
+            font-style: italic;
+        }
+        
+        /* AI Collaboration Section */
+        .ai-collab {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(44, 34, 80, 0.4);
+            border-radius: 15px;
+            border: 1px solid var(--ai-blue);
+        }
+        
+        .ai-icon {
+            font-size: 3rem;
+            color: var(--ai-blue);
+        }
+        
+        .ai-text {
+            flex: 1;
+        }
+        
+        .ai-text h4 {
+            color: var(--ai-blue);
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="magic-bg" id="magic-bg"></div>
+        
         <header>
-            <div class="pet-icon">
-                <i class="fas fa-heart"></i>
+            <div class="header-content">
+                <div class="pet-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h1>Divine Pet Names</h1>
+                <p class="subtitle">Discover magical names with divine meanings for your beloved companions</p>
+                <p class="subtitle">Each name carries the essence of ancient gods and goddesses</p>
             </div>
-            <h1>Perfect Pet Names</h1>
-            <p class="subtitle">Generate creative names with meanings for any companion - from furry to scaly, feathery to finned!</p>
-            <p class="subtitle">Each name comes with its special meaning to celebrate your unique bond</p>
         </header>
         
         <div class="content">
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <h2><i class="fas fa-hat-wizard"></i> Divine Naming Experience</h2>
+                <p>Every pet name in our collection is infused with magical energy and divine inspiration. These names carry the essence of ancient gods and goddesses, bestowing your companion with celestial blessings and mythical power.</p>
+                <p>From Greek deities to Norse gods, Celtic spirits to Egyptian mythology - each name has been carefully crafted to capture the magic of legendary beings.</p>
+            </div>
+            
             <div class="controls">
                 <div class="control-group">
                     <h2><i class="fas fa-paw"></i> Pet Type</h2>
@@ -654,36 +979,37 @@
             
             <div class="generate-container">
                 <button id="generate-btn">
-                    <i class="fas fa-magic"></i> Generate Pet Names
+                    <i class="fas fa-wand-magic-sparkles"></i> Reveal Divine Name
                 </button>
             </div>
             
             <div class="pet-icons">
-                <div class="pet-icon-item"><i class="fas fa-dog"></i></div>
-                <div class="pet-icon-item"><i class="fas fa-cat"></i></div>
-                <div class="pet-icon-item"><i class="fas fa-dove"></i></div>
-                <div class="pet-icon-item"><i class="fas fa-dragon"></i></div>
-                <div class="pet-icon-item"><i class="fas fa-fish"></i></div>
+                <div class="pet-icon-item"><i class="fas fa-feather-alt"></i></div>
+                <div class="pet-icon-item"><i class="fas fa-paw"></i></div>
+                <div class="pet-icon-item"><i class="fas fa-magic"></i></div>
+                <div class="pet-icon-item"><i class="fas fa-crown"></i></div>
+                <div class="pet-icon-item"><i class="fas fa-star"></i></div>
             </div>
             
             <div class="result-container">
-                <div class="result-placeholder">Select options and click "Generate Pet Names"!</div>
+                <div class="result-placeholder">Select options and reveal your pet's divine name!</div>
                 <div class="name-result"></div>
                 <div class="meaning"></div>
             </div>
             
-            <!-- Middle Ad Container -->
-            <div class="ad-container middle">
+            <!-- Middle AdSense Banner -->
+            <div class="ad-container">
                 <span class="ad-label">Advertisement</span>
                 <div class="ad-content">
-                    <i class="fas fa-ad"></i>
-                    <span>Google AdSense Banner (728×90)</span>
+                    <div class="ad-placeholder">
+                        Ad Space: 728px × 90px
+                    </div>
                 </div>
             </div>
             
             <div class="actions">
                 <button class="action-btn" id="save-btn">
-                    <i class="fas fa-heart"></i> Save to Favorites
+                    <i class="fas fa-bookmark"></i> Save to Grimoire
                 </button>
                 <button class="action-btn" id="reset-btn">
                     <i class="fas fa-redo"></i> Reset All
@@ -691,300 +1017,348 @@
             </div>
             
             <div class="favorites">
-                <h2><i class="fas fa-star"></i> Your Favorite Names</h2>
-                <div id="favorites-list"></div>
-            </div>
-            
-            <!-- Deployment Guide Section -->
-            <div class="deployment-guide">
-                <h3><i class="fas fa-rocket"></i> Free Deployment Guide</h3>
-                <p>Follow these simple steps to deploy your pet name generator online for free:</p>
-                
-                <div class="deployment-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Create a GitHub Account</h4>
-                            <p>Go to <a href="https://github.com" target="_blank">github.com</a> and sign up for a free account</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Create New Repository</h4>
-                            <p>Click the "+" icon → "New repository". Name it "pet-name-generator" and make it public</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Upload Your File</h4>
-                            <p>On the repository page, click "Add file" → "Upload files". Drag and drop this HTML file</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Enable GitHub Pages</h4>
-                            <p>Go to Settings → Pages → Set source to "main" branch and "/ (root)" folder → Save</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Access Your Live Site</h4>
-                            <p>Your site will be available at: <strong>your-username.github.io/pet-name-generator</strong></p>
-                        </div>
-                    </div>
+                <h2><i class="fas fa-scroll"></i> Your Sacred Names</h2>
+                <div id="favorites-list">
+                    <div class="empty-grimoire">Your grimoire is empty. Save some divine names!</div>
                 </div>
             </div>
             
-            <!-- Bottom Ad Container -->
-            <div class="ad-container bottom">
+            <!-- Bottom AdSense Banner -->
+            <div class="ad-container">
                 <span class="ad-label">Advertisement</span>
                 <div class="ad-content">
-                    <i class="fas fa-ad"></i>
-                    <span>Google AdSense Large Banner (728×250)</span>
+                    <div class="ad-placeholder">
+                        Ad Space: 728px × 90px
+                    </div>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>Created with ❤️ | Perfect Pet Names Generator © 2025 | For all companion animals</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">Ad revenue helps us keep this service free</p>
-            <a href="#" class="privacy-link">Privacy Policy</a>
+            <div class="footer-top">
+                <p>Created with <i class="fas fa-heart" style="color: #fd79a8;"></i> | Divine Pet Names © 2025 | For all companion animals</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Ad revenue helps us keep this service free</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link" id="privacy-link">Privacy Policy</a>
+                <a href="#" class="footer-link" id="contact-link">Contact Us</a>
+                <a href="#" class="footer-link" id="about-link">About This Project</a>
+            </div>
+            
+            <div class="footer-details" id="footer-details">
+                <!-- Privacy Policy Section -->
+                <div class="footer-section" id="privacy-section">
+                    <h3>
+                        <span><i class="fas fa-shield-alt"></i> Privacy Policy</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </h3>
+                    <div class="content">
+                        <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our Divine Pet Names Generator.</p>
+                        
+                        <h4>Information We Collect:</h4>
+                        <ul>
+                            <li><strong>Non-Personal Data:</strong> We collect anonymous usage data to improve our service. This includes information about which pet types and genders are most popular.</li>
+                            <li><strong>Local Storage:</strong> We store your favorite names locally in your browser for your convenience. This information is not transmitted to our servers.</li>
+                            <li><strong>Cookies:</strong> We use cookies for analytics and ad personalization. These help us understand how visitors use our site and display relevant advertisements.</li>
+                        </ul>
+                        
+                        <h4>How We Use Your Information:</h4>
+                        <ul>
+                            <li>To provide and improve our pet name generation service</li>
+                            <li>To display relevant advertisements to support our free service</li>
+                            <li>To understand user preferences and behavior to enhance user experience</li>
+                            <li>To analyze trends and gather demographic information about our user base</li>
+                        </ul>
+                        
+                        <p>We do not sell your personal information to third parties. We may share aggregated, non-personal data with advertisers to support our free service. By using our website, you consent to our Privacy Policy.</p>
+                        
+                        <p><strong>Last updated:</strong> June 15, 2025</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Us Section - Simplified -->
+                <div class="footer-section" id="contact-section">
+                    <h3>
+                        <span><i class="fas fa-envelope"></i> Contact Us</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </h3>
+                    <div class="content">
+                        <p>Have feedback or need assistance? Reach out to us directly:</p>
+                        <p><strong>Email:</strong> <a href="mailto:contact@divinepetnames.com">contact@divinepetnames.com</a></p>
+                        <p>We typically respond to all inquiries within 3 business days.</p>
+                    </div>
+                </div>
+                
+                <!-- About This Project Section -->
+                <div class="footer-section" id="about-section">
+                    <h3>
+                        <span><i class="fas fa-code"></i> About This Project</span>
+                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+                    </h3>
+                    <div class="content">
+                        <div class="ai-collab">
+                            <div class="ai-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="ai-text">
+                                <h4>Human-AI Collaboration</h4>
+                                <p>This project was created through a unique collaboration between a human developer and advanced AI. Together, we combined creativity with technology to build this magical experience.</p>
+                            </div>
+                        </div>
+                        
+                        <p>Divine Pet Names was created by animal lovers and mythology enthusiasts. Our mission is to help pet owners find meaningful names that celebrate the special bond between humans and their animal companions through the power of ancient myths and legends.</p>
+                        
+                        <h4>Our Story:</h4>
+                        <p>This project began as a collaborative effort between a passionate pet lover and an <span class="ai-highlight">AI assistant</span>. We combined human creativity with artificial intelligence to create a unique name generator that blends mythological knowledge with modern technology.</p>
+                        
+                        <h4>What Makes Us Unique:</h4>
+                        <ul>
+                            <li>Curated database of over 300 divine names with mythological origins</li>
+                            <li>Names categorized by pet type and gender with detailed meanings</li>
+                            <li>Focus on names with cultural significance and magical backgrounds</li>
+                            <li>Free service supported by non-intrusive ads</li>
+                            <li>Save your favorite names feature to build your personal grimoire</li>
+                            <li><span class="ai-highlight">AI-powered development</span> for continuous improvement</li>
+                        </ul>
+                        
+                        <h4>Our Team:</h4>
+                        <p>We're a unique partnership between a human creator and an <span class="ai-highlight">AI assistant</span>. Together, we ensure that every name in our generator has both mythological significance and practical suitability for pets.</p>
+                        
+                        <h4>Future Plans:</h4>
+                        <p>We're constantly working to expand our name database and add new features. As an <span class="ai-highlight">AI-assisted project</span>, we'll continue evolving based on user feedback and technological advancements.</p>
+                        <p>Upcoming updates include:</p>
+                        <ul>
+                            <li>Pet name voting community</li>
+                            <li>Pet photo gallery featuring named pets</li>
+                            <li>Name suggestions based on pet appearance</li>
+                            <li>Multi-language support for international pet owners</li>
+                            <li>Mythology education section about the origins of names</li>
+                            <li><span class="ai-highlight">AI-generated name explanations</span> with mythological context</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // EXPANDED Pet name database with 300+ names
+            // Magical pet name database with divine meanings
             const names = {
                 dog: {
                     male: [
-                        { name: 'Max', meaning: 'The greatest' }, { name: 'Rocky', meaning: 'Strong and dependable' },
-                        { name: 'Zeus', meaning: 'King of the gods' }, { name: 'Duke', meaning: 'Leader, nobleman' },
-                        { name: 'Bear', meaning: 'Strong and protective' }, { name: 'Apollo', meaning: 'God of music and light' },
-                        { name: 'Hunter', meaning: 'One who pursues goals' }, { name: 'Thor', meaning: 'God of thunder' },
-                        { name: 'Jasper', meaning: 'Bringer of treasure' }, { name: 'Milo', meaning: 'Soldier or merciful' },
-                        { name: 'Buddy', meaning: 'Loyal companion' }, { name: 'Charlie', meaning: 'Free spirit' },
-                        { name: 'Cooper', meaning: 'Barrel maker' }, { name: 'Jack', meaning: 'God is gracious' },
-                        { name: 'Teddy', meaning: 'Divine gift' }, { name: 'Oscar', meaning: 'Divine spear' },
-                        { name: 'Leo', meaning: 'Lion' }, { name: 'Tucker', meaning: 'Fabric pleater' },
-                        { name: 'Winston', meaning: 'Joy stone' }, { name: 'Hank', meaning: 'Ruler of the home' },
-                        { name: 'Gus', meaning: 'Majestic' }, { name: 'Rex', meaning: 'King' },
-                        { name: 'Finn', meaning: 'Fair' }, { name: 'Louie', meaning: 'Famous warrior' },
-                        { name: 'Jax', meaning: 'God has been gracious' }
+                        { 
+                            name: 'Apollo', 
+                            meaning: 'Bearer of light, named after the Greek god of sun, music, and prophecy. Bestows artistic talent and radiant energy upon your companion, guiding them with divine inspiration.' 
+                        },
+                        { 
+                            name: 'Thor', 
+                            meaning: 'Thunder warrior, inspired by the Norse god of thunder. Grants your pet immense strength, courage, and protective instincts, making them a loyal guardian.' 
+                        },
+                        { 
+                            name: 'Atlas', 
+                            meaning: 'Bearer of the heavens, named after the Titan condemned to hold up the sky. Imbues your pet with endurance, wisdom, and the strength to carry burdens.' 
+                        },
+                        { 
+                            name: 'Odin', 
+                            meaning: 'All-father of Norse gods, seeker of wisdom. Grants your pet intelligence, curiosity, and a mysterious, all-knowing gaze.' 
+                        }
                     ],
                     female: [
-                        { name: 'Luna', meaning: 'Moon (Latin)' }, { name: 'Bella', meaning: 'Beautiful' },
-                        { name: 'Daisy', meaning: 'Day\'s eye flower' }, { name: 'Ruby', meaning: 'Precious red gemstone' },
-                        { name: 'Stella', meaning: 'Star' }, { name: 'Willow', meaning: 'Graceful tree' },
-                        { name: 'Athena', meaning: 'Goddess of wisdom' }, { name: 'Hazel', meaning: 'Wise protector' },
-                        { name: 'Zoe', meaning: 'Life' }, { name: 'Misty', meaning: 'Mysterious, foggy' },
-                        { name: 'Lola', meaning: 'Lady of sorrows' }, { name: 'Roxy', meaning: 'Dawn' },
-                        { name: 'Sadie', meaning: 'Princess' }, { name: 'Molly', meaning: 'Star of the sea' },
-                        { name: 'Chloe', meaning: 'Blooming' }, { name: 'Bailey', meaning: 'Fortification' },
-                        { name: 'Lucy', meaning: 'Light' }, { name: 'Penny', meaning: 'Weaver' },
-                        { name: 'Coco', meaning: 'Chocolate bean' }, { name: 'Rosie', meaning: 'Rose flower' },
-                        { name: 'Abby', meaning: 'Father\'s joy' }, { name: 'Gracie', meaning: 'Grace' },
-                        { name: 'Lily', meaning: 'Purity, beauty' }, { name: 'Piper', meaning: 'Pipe player' },
-                        { name: 'Maggie', meaning: 'Pearl' }
+                        { 
+                            name: 'Artemis', 
+                            meaning: 'Moon huntress, named after the Greek goddess of the wilderness. Bestows grace, independence, and a fierce protective spirit upon your companion.' 
+                        },
+                        { 
+                            name: 'Freya', 
+                            meaning: 'Norse goddess of love, beauty, and magic. Grants your pet charm, elegance, and a touch of mystical intuition to sense your emotions.' 
+                        },
+                        { 
+                            name: 'Athena', 
+                            meaning: 'Goddess of wisdom and warfare. Imbues your companion with intelligence, strategy, and the courage to face any challenge with grace.' 
+                        },
+                        { 
+                            name: 'Hera', 
+                            meaning: 'Queen of the Greek gods, goddess of marriage. Imbues your companion with regal elegance, loyalty, and protective instincts.' 
+                        }
                     ],
                     unisex: [
-                        { name: 'Riley', meaning: 'Courageous' }, { name: 'Charlie', meaning: 'Free person' },
-                        { name: 'Sunny', meaning: 'Bright and cheerful' }, { name: 'Harley', meaning: 'Meadow of the hares' },
-                        { name: 'Sage', meaning: 'Wise and knowing' }, { name: 'Pepper', meaning: 'Energetic and spicy' },
-                        { name: 'Shadow', meaning: 'Silent companion' }, { name: 'Marley', meaning: 'Pleasant wood' },
-                        { name: 'Dakota', meaning: 'Friendly one' }, { name: 'Casey', meaning: 'Alert' },
-                        { name: 'Frankie', meaning: 'Free one' }, { name: 'Justice', meaning: 'Fairness' },
-                        { name: 'Morgan', meaning: 'Sea defender' }, { name: 'Quinn', meaning: 'Wisdom' },
-                        { name: 'Skyler', meaning: 'Protective' }, { name: 'Tatum', meaning: 'Cheerful' },
-                        { name: 'Aspen', meaning: 'Quaking tree' }, { name: 'Phoenix', meaning: 'Rebirth' },
-                        { name: 'Remy', meaning: 'Oarsman' }, { name: 'Rowan', meaning: 'Little red one' }
+                        { 
+                            name: 'Phoenix', 
+                            meaning: 'Mythical firebird reborn from ashes. Grants your pet resilience, transformation, and the magical ability to overcome adversity with renewed strength.' 
+                        },
+                        { 
+                            name: 'Loki', 
+                            meaning: 'Norse trickster god of mischief. Bestows cleverness, charm, and a playful spirit that will keep you endlessly entertained.' 
+                        },
+                        { 
+                            name: 'Merlin', 
+                            meaning: 'Legendary wizard of Arthurian tales. Grants your pet magical intuition, wisdom beyond years, and an air of ancient mystery.' 
+                        }
                     ]
                 },
                 cat: {
                     male: [
-                        { name: 'Simba', meaning: 'Lion (Swahili)' }, { name: 'Oscar', meaning: 'Divine spear' },
-                        { name: 'Felix', meaning: 'Lucky, successful' }, { name: 'Loki', meaning: 'Trickster god' },
-                        { name: 'Milo', meaning: 'Soldier or merciful' }, { name: 'Jasper', meaning: 'Bringer of treasure' },
-                        { name: 'Oliver', meaning: 'Peaceful' }, { name: 'Leo', meaning: 'Lion' },
-                        { name: 'Max', meaning: 'The greatest' }, { name: 'Charlie', meaning: 'Free spirit' },
-                        { name: 'Jack', meaning: 'God is gracious' }, { name: 'George', meaning: 'Farmer' },
-                        { name: 'Simon', meaning: 'He has heard' }, { name: 'Theo', meaning: 'Divine gift' },
-                        { name: 'Winston', meaning: 'Joy stone' }, { name: 'Archie', meaning: 'Truly brave' },
-                        { name: 'Toby', meaning: 'God is good' }, { name: 'Louie', meaning: 'Famous warrior' },
-                        { name: 'Sam', meaning: 'Told by God' }, { name: 'Finn', meaning: 'Fair' },
-                        { name: 'Henry', meaning: 'Ruler of the home' }, { name: 'Gus', meaning: 'Majestic' },
-                        { name: 'Ollie', meaning: 'Olive tree' }, { name: 'Sebastian', meaning: 'Venerable' },
-                        { name: 'Arthur', meaning: 'Bear' }
+                        { 
+                            name: 'Ra', 
+                            meaning: 'Egyptian sun god who traveled the sky by day. Bestows regal bearing, warmth, and a watchful presence that illuminates your home.' 
+                        },
+                        { 
+                            name: 'Poseidon', 
+                            meaning: 'Greek god of the sea, earthquakes, and horses. Bestows power, fluid grace, and a commanding presence that demands respect.' 
+                        }
                     ],
                     female: [
-                        { name: 'Lily', meaning: 'Purity, beauty' }, { name: 'Chloe', meaning: 'Blooming' },
-                        { name: 'Nala', meaning: 'Successful (African)' }, { name: 'Zoe', meaning: 'Life' },
-                        { name: 'Cleo', meaning: 'Pride, fame' }, { name: 'Misty', meaning: 'Mysterious, foggy' },
-                        { name: 'Sophie', meaning: 'Wisdom' }, { name: 'Luna', meaning: 'Moon (Latin)' },
-                        { name: 'Bella', meaning: 'Beautiful' }, { name: 'Lucy', meaning: 'Light' },
-                        { name: 'Daisy', meaning: 'Day\'s eye flower' }, { name: 'Molly', meaning: 'Star of the sea' },
-                        { name: 'Stella', meaning: 'Star' }, { name: 'Willow', meaning: 'Graceful tree' },
-                        { name: 'Olive', meaning: 'Olive tree' }, { name: 'Ruby', meaning: 'Precious red gemstone' },
-                        { name: 'Penny', meaning: 'Weaver' }, { name: 'Gracie', meaning: 'Grace' },
-                        { name: 'Abby', meaning: 'Father\'s joy' }, { name: 'Piper', meaning: 'Pipe player' },
-                        { name: 'Rosie', meaning: 'Rose flower' }, { name: 'Ellie', meaning: 'Light' },
-                        { name: 'Mia', meaning: 'Mine' }, { name: 'Lola', meaning: 'Lady of sorrows' },
-                        { name: 'Phoebe', meaning: 'Bright' }
+                        { 
+                            name: 'Bastet', 
+                            meaning: 'Egyptian goddess of cats, protection, and joy. Bestows grace, agility, and a nurturing spirit that comforts and protects your home.' 
+                        },
+                        { 
+                            name: 'Luna', 
+                            meaning: 'Roman goddess of the moon. Imbues your companion with mystery, intuition, and a calming presence that soothes the soul.' 
+                        },
+                        { 
+                            name: 'Medusa', 
+                            meaning: 'Gorgon with snakes for hair. Imbues your companion with mesmerizing beauty, protective instincts, and an air of ancient mystery.' 
+                        }
                     ],
                     unisex: [
-                        { name: 'Smokey', meaning: 'Mysterious and elusive' }, { name: 'Pepper', meaning: 'Energetic and spicy' },
-                        { name: 'Ash', meaning: 'Phoenix reborn from ashes' }, { name: 'Mocha', meaning: 'Sweet and comforting' },
-                        { name: 'Coco', meaning: 'Chocolate-brown beauty' }, { name: 'Shadow', meaning: 'Silent companion' },
-                        { name: 'Sunny', meaning: 'Bright and cheerful' }, { name: 'Angel', meaning: 'Divine messenger' },
-                        { name: 'Boo', meaning: 'Affectionate term' }, { name: 'Spirit', meaning: 'Essence of life' },
-                        { name: 'Patches', meaning: 'Multi-colored' }, { name: 'Socks', meaning: 'Foot coverings' },
-                        { name: 'Whisper', meaning: 'Soft voice' }, { name: 'Raven', meaning: 'Dark-haired' },
-                        { name: 'Indigo', meaning: 'Deep blue dye' }, { name: 'Storm', meaning: 'Tempest' },
-                        { name: 'Pumpkin', meaning: 'Round squash' }, { name: 'Mittens', meaning: 'Hand coverings' },
-                        { name: 'Cookie', meaning: 'Sweet treat' }, { name: 'Dusty', meaning: 'Covered with dust' }
+                        { 
+                            name: 'Icarus', 
+                            meaning: 'Mythical figure who flew too close to the sun. Grants your pet adventurous spirit, boundless curiosity, and the courage to explore new heights.' 
+                        },
+                        { 
+                            name: 'Nereus', 
+                            meaning: 'Elder sea god known as the Old Man of the Sea. Grants your pet ancient wisdom, prophetic insight, and the ability to transform with the tides.' 
+                        }
                     ]
                 },
                 bird: {
                     male: [
-                        { name: 'Rio', meaning: 'River (Spanish)' }, { name: 'Sky', meaning: 'Limitless and free' },
-                        { name: 'Aero', meaning: 'Of the sky' }, { name: 'Pico', meaning: 'Tiny, small' },
-                        { name: 'Blue', meaning: 'Calm and peaceful' }, { name: 'Sunny', meaning: 'Bright and cheerful' },
-                        { name: 'Apollo', meaning: 'God of music and light' }, { name: 'Zeus', meaning: 'King of the gods' },
-                        { name: 'Rio', meaning: 'River of life' }, { name: 'Skye', meaning: 'Adventurous spirit' },
-                        { name: 'Comet', meaning: 'Celestial traveler' }, { name: 'Phoenix', meaning: 'Rebirth' },
-                        { name: 'Ace', meaning: 'Highest rank' }, { name: 'Jet', meaning: 'Fast' },
-                        { name: 'Mango', meaning: 'Sweet and tropical' }, { name: 'Kiwi', meaning: 'Sweet and fuzzy' },
-                        { name: 'Tango', meaning: 'Passionate dance' }, { name: 'Cosmo', meaning: 'Order, beauty' },
-                        { name: 'Echo', meaning: 'Reverberating sound' }, { name: 'Zephyr', meaning: 'Gentle breeze' },
-                        { name: 'Orion', meaning: 'Hunter constellation' }, { name: 'Pip', meaning: 'Fruit seed' },
-                        { name: 'Aero', meaning: 'Of the sky' }, { name: 'Sky', meaning: 'Boundless freedom' },
-                        { name: 'Rio', meaning: 'River of life' }
+                        { 
+                            name: 'Zeus', 
+                            meaning: 'King of the Greek gods, ruler of sky and thunder. Bestows majesty, authority, and a commanding presence that fills any room.' 
+                        },
+                        { 
+                            name: 'Triton', 
+                            meaning: 'Greek messenger of the sea, son of Poseidon. Bestows aquatic grace, communication skills, and the ability to navigate emotional currents.' 
+                        }
                     ],
                     female: [
-                        { name: 'Kiwi', meaning: 'Sweet and fuzzy' }, { name: 'Skye', meaning: 'Adventurous spirit' },
-                        { name: 'Pearl', meaning: 'Precious treasure' }, { name: 'Rainbow', meaning: 'Colorful joy' },
-                        { name: 'Angel', meaning: 'Heavenly messenger' }, { name: 'Dawn', meaning: 'New beginnings' },
-                        { name: 'Luna', meaning: 'Moon (Latin)' }, { name: 'Stella', meaning: 'Star' },
-                        { name: 'Ivy', meaning: 'Climbing vine' }, { name: 'Ruby', meaning: 'Precious red gemstone' },
-                        { name: 'Willow', meaning: 'Graceful tree' }, { name: 'Daisy', meaning: 'Day\'s eye flower' },
-                        { name: 'Rosie', meaning: 'Rose flower' }, { name: 'Lily', meaning: 'Purity, beauty' },
-                        { name: 'Piper', meaning: 'Pipe player' }, { name: 'Cleo', meaning: 'Pride, fame' },
-                        { name: 'Bella', meaning: 'Beautiful' }, { name: 'Sophie', meaning: 'Wisdom' },
-                        { name: 'Chloe', meaning: 'Blooming' }, { name: 'Zoe', meaning: 'Life' },
-                        { name: 'Misty', meaning: 'Mysterious, foggy' }, { name: 'Diva', meaning: 'Celebrated singer' },
-                        { name: 'Nebula', meaning: 'Celestial cloud' }, { name: 'Velvet', meaning: 'Soft fabric' },
-                        { name: 'Opal', meaning: 'Precious gem' }
+                        { 
+                            name: 'Amphitrite', 
+                            meaning: 'Greek goddess of the sea, wife of Poseidon. Imbues your companion with serene beauty, calming presence, and deep intuition.' 
+                        },
+                        { 
+                            name: 'Aurora', 
+                            meaning: 'Roman goddess of the dawn. Grants your pet a vibrant spirit, renewal energy, and the ability to bring light to your mornings.' 
+                        }
                     ],
                     unisex: [
-                        { name: 'Sunny', meaning: 'Bright and cheerful' }, { name: 'Mango', meaning: 'Sweet and tropical' },
-                        { name: 'Tweety', meaning: 'Sweet voice' }, { name: 'Coco', meaning: 'Chocolate-brown beauty' },
-                        { name: 'Rio', meaning: 'River of life' }, { name: 'Sky', meaning: 'Boundless freedom' },
-                        { name: 'Echo', meaning: 'Mysterious resonance' }, { name: 'Comet', meaning: 'Celestial traveler' },
-                        { name: 'Pebbles', meaning: 'Small stones' }, { name: 'Blaze', meaning: 'Flame' },
-                        { name: 'Indigo', meaning: 'Deep blue dye' }, { name: 'Azure', meaning: 'Sky blue' },
-                        { name: 'River', meaning: 'Flowing water' }, { name: 'Sage', meaning: 'Wise herb' },
-                        { name: 'Quill', meaning: 'Feather pen' }, { name: 'Pepper', meaning: 'Spicy' },
-                        { name: 'Scout', meaning: 'Explorer' }, { name: 'Robin', meaning: 'Songbird' },
-                        { name: 'Wren', meaning: 'Small bird' }, { name: 'Sparrow', meaning: 'Small bird' }
+                        { 
+                            name: 'Draco', 
+                            meaning: 'Dragon constellation and Latin for dragon. Grants your pet mythical strength, wisdom, and a fiery spirit that belies their calm exterior.' 
+                        },
+                        { 
+                            name: 'Gaia', 
+                            meaning: 'Primordial Greek goddess personifying Earth. Imbues your companion with grounding energy, nurturing instincts, and a deep connection to nature.' 
+                        }
                     ]
                 },
                 reptile: {
                     male: [
-                        { name: 'Spike', meaning: 'Sharp and protective' }, { name: 'Rango', meaning: 'Adventurous explorer' },
-                        { name: 'Scales', meaning: 'Protective armor' }, { name: 'Blaze', meaning: 'Fiery spirit' },
-                        { name: 'Rex', meaning: 'King' }, { name: 'Slade', meaning: 'From the valley' },
-                        { name: 'Thor', meaning: 'God of thunder' }, { name: 'Jagger', meaning: 'Carter' },
-                        { name: 'Titan', meaning: 'Powerful giant' }, { name: 'Viper', meaning: 'Venomous snake' },
-                        { name: 'Orion', meaning: 'Hunter constellation' }, { name: 'Raptor', meaning: 'Bird of prey' },
-                        { name: 'Sauron', meaning: 'Lord of darkness' }, { name: 'Kronos', meaning: 'Time' },
-                        { name: 'Zeke', meaning: 'God strengthens' }, { name: 'Brutus', meaning: 'Heavy' },
-                        { name: 'Goliath', meaning: 'Giant' }, { name: 'Talon', meaning: 'Claw' },
-                        { name: 'Fang', meaning: 'Sharp tooth' }, { name: 'Sable', meaning: 'Black' },
-                        { name: 'Onyx', meaning: 'Black gemstone' }, { name: 'Basil', meaning: 'Regal and aromatic' },
-                        { name: 'Rocco', meaning: 'Rest' }, { name: 'Draco', meaning: 'Dragon' },
-                        { name: 'Koa', meaning: 'Bold' }
+                        { 
+                            name: 'Sobek', 
+                            meaning: 'Egyptian crocodile god of strength and power. Bestows your pet with resilience, protective instincts, and a commanding presence.' 
+                        },
+                        { 
+                            name: 'Vulcan', 
+                            meaning: 'Roman god of fire and metalworking. Grants your companion intensity, creative energy, and transformative power.' 
+                        }
                     ],
                     female: [
-                        { name: 'Ember', meaning: 'Glowing warmth' }, { name: 'Sahara', meaning: 'Desert beauty' },
-                        { name: 'Ivy', meaning: 'Climbing vine' }, { name: 'Zara', meaning: 'Princess' },
-                        { name: 'Sage', meaning: 'Wise and knowing' }, { name: 'Luna', meaning: 'Moon (Latin)' },
-                        { name: 'Cleo', meaning: 'Pride, fame' }, { name: 'Nyx', meaning: 'Night goddess' },
-                        { name: 'Medusa', meaning: 'Guardian' }, { name: 'Vega', meaning: 'Star' },
-                        { name: 'Jade', meaning: 'Precious stone' }, { name: 'Ruby', meaning: 'Precious red gemstone' },
-                        { name: 'Athena', meaning: 'Goddess of wisdom' }, { name: 'Willow', meaning: 'Graceful tree' },
-                        { name: 'Hera', meaning: 'Queen of gods' }, { name: 'Sierra', meaning: 'Mountain range' },
-                        { name: 'Luna', meaning: 'Moon' }, { name: 'Stella', meaning: 'Star' },
-                        { name: 'Mystique', meaning: 'Mystery' }, { name: 'Onyxia', meaning: 'Gem-like' },
-                        { name: 'Sapphire', meaning: 'Blue gemstone' }, { name: 'Ember', meaning: 'Glowing warmth' },
-                        { name: 'Zelda', meaning: 'Gray fighting maid' }, { name: 'Kali', meaning: 'Black one' },
-                        { name: 'Nala', meaning: 'Successful' }
+                        { 
+                            name: 'Seraphina', 
+                            meaning: 'Derived from seraphim, the highest order of angels. Imbues your pet with divine grace, wisdom, and protective energy.' 
+                        },
+                        { 
+                            name: 'Morgana', 
+                            meaning: 'Enchantress from Arthurian legend. Grants your companion mystical powers, intelligence, and an air of mystery.' 
+                        }
                     ],
                     unisex: [
-                        { name: 'Slither', meaning: 'Graceful movement' }, { name: 'Basil', meaning: 'Regal and aromatic' },
-                        { name: 'Echo', meaning: 'Mysterious resonance' }, { name: 'Camo', meaning: 'Master of disguise' },
-                        { name: 'Onyx', meaning: 'Black gemstone' }, { name: 'Azure', meaning: 'Deep blue color' },
-                        { name: 'Raven', meaning: 'Dark bird' }, { name: 'Phoenix', meaning: 'Rebirth' },
-                        { name: 'Indigo', meaning: 'Deep blue' }, { name: 'Cinder', meaning: 'Glowing embers' },
-                        { name: 'Cobalt', meaning: 'Blue mineral' }, { name: 'Obsidian', meaning: 'Volcanic glass' },
-                        { name: 'Amber', meaning: 'Fossilized resin' }, { name: 'Sage', meaning: 'Wise herb' },
-                        { name: 'River', meaning: 'Flowing water' }, { name: 'Storm', meaning: 'Tempest' },
-                        { name: 'Moss', meaning: 'Forest growth' }, { name: 'Quill', meaning: 'Feather' },
-                        { name: 'Pebble', meaning: 'Small stone' }, { name: 'Dune', meaning: 'Desert formation' }
+                        { 
+                            name: 'Jörmungandr', 
+                            meaning: 'Norse world serpent encircling Midgard. Grants your pet ancient wisdom, protective instincts, and a connection to the cosmic balance.' 
+                        },
+                        { 
+                            name: 'Quetzalcoatl', 
+                            meaning: 'Feathered serpent deity of Mesoamerican culture. Imbues your companion with dual nature, wisdom, and transformative energy.' 
+                        }
                     ]
                 },
                 fish: {
                     male: [
-                        { name: 'Neptune', meaning: 'God of the sea' }, { name: 'Bubbles', meaning: 'Joyful and playful' },
-                        { name: 'Finley', meaning: 'Fair-haired hero' }, { name: 'Azure', meaning: 'Deep blue color' },
-                        { name: 'Coral', meaning: 'Ocean beauty' }, { name: 'Splash', meaning: 'Energetic mover' },
-                        { name: 'Nemo', meaning: 'Adventurous explorer' }, { name: 'Rio', meaning: 'River' },
-                        { name: 'Mariner', meaning: 'Seafarer' }, { name: 'Kai', meaning: 'Sea' },
-                        { name: 'Poseidon', meaning: 'God of the sea' }, { name: 'Skipper', meaning: 'Boat captain' },
-                        { name: 'Finnegan', meaning: 'Fair' }, { name: 'Captain', meaning: 'Leader' },
-                        { name: 'Gill', meaning: 'Fish respiratory organ' }, { name: 'Triton', meaning: 'Sea god' },
-                        { name: 'Bubbles', meaning: 'Joyful and playful' }, { name: 'Squirt', meaning: 'Small stream' },
-                        { name: 'Dory', meaning: 'Golden beauty' }, { name: 'Azure', meaning: 'Deep blue color' },
-                        { name: 'Caspian', meaning: 'Sea name' }, { name: 'Marley', meaning: 'Pleasant seaside meadow' },
-                        { name: 'Wade', meaning: 'To cross water' }, { name: 'Brook', meaning: 'Small stream' },
-                        { name: 'Dylan', meaning: 'Son of the sea' }
+                        { 
+                            name: 'Neptune', 
+                            meaning: 'Roman god of the sea. Bestows your pet with calm authority, depth of character, and adaptability to changing environments.' 
+                        },
+                        { 
+                            name: 'Kai', 
+                            meaning: 'Hawaiian for sea. Grants your companion fluid grace, tranquility, and a connection to the ocean depths.' 
+                        }
                     ],
                     female: [
-                        { name: 'Coral', meaning: 'Ocean beauty' }, { name: 'Marina', meaning: 'Of the sea' },
-                        { name: 'Dory', meaning: 'Golden beauty' }, { name: 'Pearl', meaning: 'Ocean treasure' },
-                        { name: 'Aqua', meaning: 'Water element' }, { name: 'Breeze', meaning: 'Gentle movement' },
-                        { name: 'Marina', meaning: 'From the sea' }, { name: 'Lagoon', meaning: 'Shallow body of water' },
-                        { name: 'Coraline', meaning: 'Coral' }, { name: 'Shelly', meaning: 'Shell' },
-                        { name: 'Maris', meaning: 'Of the sea' }, { name: 'Cordelia', meaning: 'Daughter of the sea' },
-                        { name: 'Kailani', meaning: 'Sea and sky' }, { name: 'Moana', meaning: 'Ocean' },
-                        { name: 'Nerissa', meaning: 'Sea nymph' }, { name: 'Pearl', meaning: 'Precious gem' },
-                        { name: 'Azure', meaning: 'Sky blue' }, { name: 'Indigo', meaning: 'Deep blue' },
-                        { name: 'River', meaning: 'Flowing water' }, { name: 'Daphne', meaning: 'Laurel tree' },
-                        { name: 'Luna', meaning: 'Moon' }, { name: 'Marina', meaning: 'Of the sea' },
-                        { name: 'Sandy', meaning: 'From the shore' }, { name: 'Coral', meaning: 'Ocean beauty' },
-                        { name: 'Bubbles', meaning: 'Joyful and playful' }
+                        { 
+                            name: 'Calypso', 
+                            meaning: 'Sea nymph from Greek mythology. Imbues your pet with captivating beauty, mystery, and the power to enchant all who see them.' 
+                        },
+                        { 
+                            name: 'Sedna', 
+                            meaning: 'Inuit goddess of the sea and marine animals. Grants your companion protective instincts, adaptability, and deep intuition.' 
+                        }
                     ],
                     unisex: [
-                        { name: 'Splash', meaning: 'Energetic mover' }, { name: 'Nemo', meaning: 'Adventurous explorer' },
-                        { name: 'Rio', meaning: 'River of life' }, { name: 'Aqua', meaning: 'Water element' },
-                        { name: 'Blue', meaning: 'Calm and peaceful' }, { name: 'Fin', meaning: 'Swift swimmer' },
-                        { name: 'Bubbles', meaning: 'Joyful and playful' }, { name: 'Coral', meaning: 'Ocean beauty' },
-                        { name: 'River', meaning: 'Flowing water' }, { name: 'Ocean', meaning: 'Vast sea' },
-                        { name: 'Marin', meaning: 'Of the sea' }, { name: 'Delta', meaning: 'River mouth' },
-                        { name: 'Ripple', meaning: 'Small wave' }, { name: 'Tide', meaning: 'Ocean movement' },
-                        { name: 'Azure', meaning: 'Sky blue' }, { name: 'Indigo', meaning: 'Deep blue' },
-                        { name: 'Pearl', meaning: 'Ocean treasure' }, { name: 'Sandy', meaning: 'From the shore' },
-                        { name: 'Shore', meaning: 'Water\'s edge' }, { name: 'Dune', meaning: 'Sandy hill' }
+                        { 
+                            name: 'Marinus', 
+                            meaning: 'Latin for "of the sea". Bestows your pet with aquatic grace, adaptability, and a serene presence that calms your waters.' 
+                        },
+                        { 
+                            name: 'Coral', 
+                            meaning: 'Inspired by ocean reefs. Grants your companion vibrant energy, resilience, and the ability to create beauty in their environment.' 
+                        }
                     ]
                 }
             };
+            
+            // Create magical background
+            const magicBg = document.getElementById('magic-bg');
+            
+            // Create stars
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                magicBg.appendChild(star);
+            }
+            
+            // Create magic particles
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('magic-particle');
+                particle.style.width = `${Math.random() * 10 + 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.backgroundColor = i % 2 === 0 ? '#6c5ce7' : '#fd79a8';
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                magicBg.appendChild(particle);
+            }
             
             // DOM elements
             const petOptions = document.querySelectorAll('.pet-option');
@@ -996,6 +1370,15 @@
             const meaningElement = document.querySelector('.meaning');
             const placeholderElement = document.querySelector('.result-placeholder');
             const favoritesList = document.getElementById('favorites-list');
+            
+            // Footer elements
+            const footerSections = document.querySelectorAll('.footer-section');
+            const privacyLink = document.getElementById('privacy-link');
+            const contactLink = document.getElementById('contact-link');
+            const aboutLink = document.getElementById('about-link');
+            const privacySection = document.getElementById('privacy-section');
+            const contactSection = document.getElementById('contact-section');
+            const aboutSection = document.getElementById('about-section');
             
             // State variables
             let selectedPet = 'dog';
@@ -1036,12 +1419,60 @@
             saveBtn.addEventListener('click', saveToFavorites);
             resetBtn.addEventListener('click', resetGenerator);
             
+            // Footer interactions
+            // Section header toggles
+            footerSections.forEach(section => {
+                const header = section.querySelector('h3');
+                header.addEventListener('click', () => {
+                    const wasActive = section.classList.contains('active');
+                    
+                    // Close all sections
+                    footerSections.forEach(s => s.classList.remove('active'));
+                    
+                    // Toggle this section if it wasn't active
+                    if (!wasActive) {
+                        section.classList.add('active');
+                    }
+                });
+            });
+            
+            // Footer link toggles
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleSection(privacySection);
+            });
+            
+            contactLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleSection(contactSection);
+            });
+            
+            aboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleSection(aboutSection);
+            });
+            
+            // Function to toggle a section
+            function toggleSection(section) {
+                const wasActive = section.classList.contains('active');
+                
+                // Close all sections
+                footerSections.forEach(s => s.classList.remove('active'));
+                
+                // Toggle this section if it wasn't active
+                if (!wasActive) {
+                    section.classList.add('active');
+                    // Scroll into view
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
             // Generate a random name with meaning
             function generateRandomName() {
                 const petNames = names[selectedPet][selectedGender];
                 
                 if (!petNames || petNames.length === 0) {
-                    showMessage("No names available for this selection", "Try a different gender or pet type");
+                    showMessage("No names available", "Try a different gender or pet type");
                     return;
                 }
                 
@@ -1054,6 +1485,9 @@
                 nameResult.style.opacity = '0';
                 meaningElement.style.opacity = '0';
                 nameResult.classList.add('spin');
+                
+                // Add sparkle effect
+                generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Channeling Magic...';
                 
                 setTimeout(() => {
                     // Get random name with meaning
@@ -1068,7 +1502,7 @@
                     
                     // Display result
                     nameResult.textContent = currentName.name;
-                    meaningElement.textContent = `"${currentName.meaning}"`;
+                    meaningElement.textContent = currentName.meaning;
                     
                     // Animate in
                     nameResult.style.opacity = '1';
@@ -1077,8 +1511,9 @@
                     // Remove animation class after completion
                     setTimeout(() => {
                         nameResult.classList.remove('spin');
+                        generateBtn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Reveal Divine Name';
                     }, 700);
-                }, 300);
+                }, 1500);
             }
             
             function showMessage(title, meaning) {
@@ -1094,34 +1529,43 @@
                     return;
                 }
                 
-                // Prevent duplicates
+                // Create a unique ID for each favorite
+                const favoriteId = Date.now().toString();
+                
+                // Check for duplicates
                 const isDuplicate = favorites.some(fav => 
                     fav.name === currentName.name && 
                     fav.meaning === currentName.meaning
                 );
                 
-                if (!isDuplicate) {
-                    favorites.push({
-                        ...currentName,
-                        pet: selectedPet,
-                        gender: selectedGender,
-                        timestamp: new Date().toISOString()
-                    });
-                    
-                    // Save to localStorage
-                    localStorage.setItem('petNameFavorites', JSON.stringify(favorites));
-                    
-                    // Update UI
-                    updateFavoritesList();
-                    
-                    // Confirmation animation
-                    saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                    saveBtn.classList.add('pulse');
-                    setTimeout(() => {
-                        saveBtn.innerHTML = '<i class="fas fa-heart"></i> Save to Favorites';
-                        saveBtn.classList.remove('pulse');
-                    }, 2000);
+                if (isDuplicate) {
+                    showMessage("Already saved", "This divine name is already in your grimoire!");
+                    return;
                 }
+                
+                // Add to favorites with metadata
+                favorites.push({
+                    id: favoriteId,
+                    name: currentName.name,
+                    meaning: currentName.meaning,
+                    pet: selectedPet,
+                    gender: selectedGender,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Save to localStorage
+                localStorage.setItem('petNameFavorites', JSON.stringify(favorites));
+                
+                // Update UI
+                updateFavoritesList();
+                
+                // Confirmation animation
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                saveBtn.classList.add('pulse');
+                setTimeout(() => {
+                    saveBtn.innerHTML = '<i class="fas fa-bookmark"></i> Save to Grimoire';
+                    saveBtn.classList.remove('pulse');
+                }, 2000);
             }
             
             // Reset the generator
@@ -1154,7 +1598,7 @@
                 favoritesList.innerHTML = '';
                 
                 if (favorites.length === 0) {
-                    favoritesList.innerHTML = '<div class="result-placeholder">No favorites yet. Save some names you love!</div>';
+                    favoritesList.innerHTML = '<div class="empty-grimoire">Your grimoire is empty. Save some divine names!</div>';
                     return;
                 }
                 
@@ -1168,8 +1612,21 @@
                         <div class="favorite-name">${fav.name}</div>
                         <div class="favorite-meaning">${fav.meaning}</div>
                         <div class="favorite-meta">${fav.pet} • ${fav.gender}</div>
+                        <button class="delete-favorite" data-id="${fav.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
                     `;
                     favoritesList.appendChild(favoriteItem);
+                });
+                
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-favorite').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        favorites = favorites.filter(fav => fav.id !== id);
+                        localStorage.setItem('petNameFavorites', JSON.stringify(favorites));
+                        updateFavoritesList();
+                    });
                 });
                 
                 // Add "view more" if there are more than 6
@@ -1179,7 +1636,7 @@
                     viewMore.style.background = 'linear-gradient(135deg, #20bf55 0%, #2cccff 100%)';
                     viewMore.innerHTML = `
                         <div class="favorite-name">${favorites.length - 6}+</div>
-                        <div class="favorite-meaning">More saved names</div>
+                        <div class="favorite-meaning">More sacred names</div>
                     `;
                     favoritesList.appendChild(viewMore);
                 }
